@@ -527,7 +527,7 @@ section {
       </nav> */}
 
       <section className="hero" style={{ backgroundColor: "#000" }}>
-        <div className="plasma-bg">
+        {/* <div className="plasma-bg">
           <Plasma
             color="#ff6b35"
             speed={0.8}
@@ -536,7 +536,7 @@ section {
             opacity={1}
             mouseInteractive={true}
           />
-        </div>
+        </div> */}
         <div className="hero-cards" style={{ position: "relative", zIndex: 1 }}>
           <div className="card" id="hero-card-1">
             <div className="card-title">
