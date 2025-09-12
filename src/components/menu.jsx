@@ -47,7 +47,9 @@ export default function Home() {
         let isMenuOpen = false;
         let isAnimating = false;
 
-        const onToggleClick = () => {
+        // Toggle with optional callback fired after CLOSE animation completes
+        const onToggleClick = (maybeCallback) => {
+            const afterClose = typeof maybeCallback === 'function' ? maybeCallback : undefined;
             if (isAnimating) return;
             if (!isMenuOpen) {
                 isAnimating = true;
@@ -89,6 +91,8 @@ export default function Home() {
                     gsap.set(menuMediaWrapper, { opacity: 0 });
                     isAnimating = false;
                     lenisRef.current?.lenis?.start?.();
+                    // Fire callback when fully closed
+                    afterClose && afterClose();
                 });
 
                 isMenuOpen = false;
@@ -97,9 +101,44 @@ export default function Home() {
 
         menuToggleBtn?.addEventListener("click", onToggleClick);
 
+        // Smooth-scroll navigation for menu links
+        // Attach to ALL menu links so the menu always closes on click
+        const navLinks = Array.from(
+          document.querySelectorAll('.menu-link a')
+        );
+        const navHandlers = [];
+
+        const scrollWithLenis = (target) => {
+          const lenis = lenisRef.current?.lenis;
+          const opts = { duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) };
+          if (target === 'top') {
+            lenis?.scrollTo(0, opts);
+            return;
+          }
+          const el = document.querySelector(target);
+          lenis?.scrollTo(el || 0, opts);
+        };
+
+        navLinks.forEach((link) => {
+          const handler = (e) => {
+            e.preventDefault();
+            const target = link.getAttribute('data-target');
+
+            // Close menu first if open, then optional scroll (via callback on completion)
+            if (isMenuOpen) {
+              onToggleClick(() => { if (target) scrollWithLenis(target); });
+            } else if (target) {
+              scrollWithLenis(target);
+            }
+          };
+          link.addEventListener('click', handler);
+          navHandlers.push([link, handler]);
+        });
+
         return () => {
             gsap.ticker.remove(update);
             menuToggleBtn?.removeEventListener("click", onToggleClick);
+            navHandlers.forEach(([link, handler]) => link.removeEventListener('click', handler));
             gsap.globalTimeline.clear();
         };
     }, []);
@@ -204,7 +243,7 @@ nav {
   width: 100vw;
   padding: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   pointer-events: all;
   color: var(--menu-fg-secondary);
@@ -404,9 +443,6 @@ nav {
 
             <nav>
                 <div className="menu-bar">
-                    <div className="menu-logo">
-                        <a href="#"><img src="/logo.png" alt="" /></a>
-                    </div>
                     <div className="menu-toggle-btn">
                         <div className="menu-toggle-label"><p>Menu</p></div>
                         <div className="menu-hamburger-icon">
@@ -423,11 +459,11 @@ nav {
                         <div className="menu-content-wrapper">
                             <div className="menu-content-main">
                                 <div className="menu-col">
-                                    <div className="menu-link"><a href="#">Index</a></div>
-                                    <div className="menu-link"><a href="#">Portfolio</a></div>
+                                    <div className="menu-link"><a href="#top" data-target="top">Index</a></div>
+                                    <div className="menu-link"><a href="#portfolio" data-target="#portfolio">Portfolio</a></div>
                                     <div className="menu-link"><a href="#">Studio</a></div>
                                     <div className="menu-link"><a href="#">Journal</a></div>
-                                    <div className="menu-link"><a href="#">Connect</a></div>
+                                    <div className="menu-link"><a href="#connect" data-target="#connect">Connect</a></div>
                                 </div>
 
                                 <div className="menu-col">

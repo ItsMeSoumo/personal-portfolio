@@ -153,7 +153,7 @@ export default function Home() {
 
   return (
     <>
-      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+      {/* Lenis root is provided globally in Menu for smooth scroll */}
       {/* Empty style block for you to add CSS later */}
       <style jsx global>{`
         :root {
@@ -716,22 +716,24 @@ section {
           <div className="intro-left">
             <AnimatedCopy>
             <h1>
-              Designing thoughtful interfaces.
+              Design‑driven developer shipping real products.
               <br />
-              Building standout digital experiences.
+              Dashboards that align teams and track progress.
               <br />
-              Merging creativity and code to craft
+              Apps for clinics, firms and agencies.
               <br />
-              products users remember.
+              Motion‑rich websites that feel fast and alive.
             </h1>
             </AnimatedCopy>
           </div>
           <div className="intro-right">
             <AnimatedCopy>
             <p>
-              Crafting modern, user‑first web experiences through a blend of
-              design sense and technical depth. Passionate about clean UI,
-              smooth performance, and standout solutions.
+              End‑to‑end builds across an admin dashboard (role‑based tasks +
+              progress), a 3‑in‑1 doctor platform, a real‑world law firm site,
+              a full‑stack agency platform, and GSAP/3D motion work. Stack:
+              Next.js, React, Node/Express, Firebase, MongoDB. Focus:
+              performance, accessibility and smooth UX.
             </p>
             </AnimatedCopy>
             <div className="intro-circle">About me</div>
@@ -800,12 +802,12 @@ section {
                       <span>02</span>
                     </div>
                     <div className="card-copy">
-                      <p>Wireframes</p>
-                      <p>UI Kits</p>
-                      <p>Prototypes</p>
+                      <p>HTML/CSS</p>
+                      <p>GSAP Motion</p>
+                      <p>Responsive</p>
+                      <p>Optimization</p>
                       <p>Visual Style</p>
                       <p>Interaction</p>
-                      <p>Design QA</p>
                     </div>
                     <div className="card-title">
                       <span>02</span>
@@ -835,12 +837,12 @@ section {
                       <span>03</span>
                     </div>
                     <div className="card-copy">
-                      <p>HTML/CSS/JS</p>
-                      <p>CMS Build</p>
-                      <p>GSAP Motion</p>
-                      <p>Responsive</p>
-                      <p>Optimization</p>
-                      <p>Launch</p>
+                      <p>Node</p>
+                      <p>Express</p>
+                      <p>Next.js</p>
+                      <p>React</p>
+                      <p>Firebase</p>
+                      <p>MongoDB</p>
                     </div>
                     <div className="card-title">
                       <span>03</span>
@@ -910,12 +912,12 @@ section {
                     <span>02</span>
                   </div>
                   <div className="card-copy">
-                    <p>Wireframes</p>
-                    <p>UI Kits</p>
-                    <p>Prototypes</p>
+                    <p>HTML/CSS</p>
+                    <p>GSAP Motion</p>
+                    <p>Responsive</p>
+                    <p>Optimization</p>
                     <p>Visual Style</p>
                     <p>Interaction</p>
-                    <p>Design QA</p>
                   </div>
                   <div className="card-title">
                     <span>02</span>
@@ -945,12 +947,12 @@ section {
                     <span>03</span>
                   </div>
                   <div className="card-copy">
-                    <p>HTML/CSS/JS</p>
-                    <p>CMS Build</p>
-                    <p>GSAP Motion</p>
-                    <p>Responsive</p>
-                    <p>Optimization</p>
-                    <p>Launch</p>
+                    <p>Node</p>
+                    <p>Express</p>
+                    <p>Next.js</p>
+                    <p>React</p>
+                    <p>Firebase</p>
+                    <p>MongoDB</p>
                   </div>
                   <div className="card-title">
                     <span>03</span>

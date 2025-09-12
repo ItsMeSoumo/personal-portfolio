@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis } from "lenis/react";
@@ -7,6 +7,7 @@ import AnimatedCopy from "./AnimatedCopy";
 
 export default function Home() {
   const lenisRef = useRef();
+  const [localTime, setLocalTime] = useState("");
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -63,6 +64,23 @@ export default function Home() {
       lenis?.off("scroll", onLenisScroll);
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
+  }, []);
+
+  // Local time updater for the outro section
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const offsetMin = -now.getTimezoneOffset();
+      const sign = offsetMin >= 0 ? "+" : "-";
+      const abs = Math.abs(offsetMin);
+      const hh = String(Math.floor(abs / 60)).padStart(2, "0");
+      const mm = String(abs % 60).padStart(2, "0");
+      setLocalTime(`${time} GMT${sign}${hh}:${mm}`);
+    };
+    updateTime();
+    const t = setInterval(updateTime, 60_000);
+    return () => clearInterval(t);
   }, []);
 
   return (
@@ -123,6 +141,130 @@ p {
   text-align: center;
   background-color: #f9f4eb;
   color: #141414;
+}
+
+/* Outro redesign */
+.outro {
+  background-color: #0f0f0f;
+  color: #eaeaea;
+  text-align: left;
+  margin-top: -10vh; /* pull section up as requested */
+}
+
+.outro .outro-content {
+  position: relative;
+  width: min(1200px, 92vw);
+  height: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.outro-title {
+  font-family: "Barlow Condensed";
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.outro-divider {
+  position: absolute;
+  top: 52%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.outro-cta {
+  position: absolute;
+  top: calc(52% - 88px);
+  right: clamp(1.25rem, 8vw, 8rem);
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  background: #4f5dff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(79, 93, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.outro-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(79, 93, 255, 0.45);
+}
+
+.outro-pills {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(2.25rem, 6vh, 3.5rem);
+  display: flex;
+  gap: 1rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-weight: 600;
+}
+
+.pill:hover { background: rgba(255, 255, 255, 0.08); }
+
+.outro-local-time,
+.outro-social {
+  position: absolute;
+  bottom: 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.outro-local-time { left: 1.5rem; }
+.outro-social { right: 1.5rem; text-align: right; }
+
+.outro-social-title {
+  font-weight: 300;
+  opacity: 0.65;
+}
+
+.outro-time-value {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  letter-spacing: normal;
+  text-transform: none;
+  opacity: 0.9;
+}
+
+.outro-social .links a {
+  margin-left: 0.9rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.outro-social .links a:hover { opacity: 1; text-decoration: underline; }
+
+@media (max-width: 800px) {
+  .outro-title { font-size: clamp(2rem, 9vw, 3rem); }
+  .outro-cta { width: 128px; height: 128px; top: calc(52% - 64px); right: 1rem; }
+  .outro-pills { flex-direction: column; gap: 0.75rem; }
 }
 
 /* Hero subtitle under the main heading */
@@ -304,15 +446,15 @@ p {
       
       `}</style>
 
-      <section className="hero">
+      <section id="portfolio" className="hero">
         <div>
           <h1>Some Of My works</h1>
-          <AnimatedCopy>
-          <p className="hero-sub">
+          <AnimatedCopy colorInitial="#bdbdbd" colorAccent="#00e676" colorFinal="#141414">
+            <p className="hero-sub">
             Designing and building interactive web experiences. Below are selected
             works — dashboards, apps, and brand sites — with live demos and links.
             Explore the projects to see craft, performance, and UX in action.
-          </p>
+            </p>
           </AnimatedCopy>
         </div>
       </section>
@@ -467,8 +609,32 @@ p {
         </div>
       </section>
 
-      <section className="outro">
-        <h1>Next Canvas Awaits</h1>
+      <section id="connect" className="outro">
+        <div className="outro-content">
+          <h1 className="outro-title">Let's work together</h1>
+          <div className="outro-divider" />
+
+          <a className="outro-cta" href="mailto:soumo2020.saha@gmail.com">Get in touch</a>
+
+          <div className="outro-pills">
+            <a className="pill" href="mailto:soumo2020.saha@gmail.com">soumo2020.saha@gmail.com</a>
+            <a className="pill" href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+          </div>
+
+          <div className="outro-local-time">
+            <div>Local Time</div>
+            <span className="outro-time-value">{localTime}</span>
+          </div>
+
+          <div className="outro-social">
+            <div className="outro-social-title">Socials</div>
+            <div className="links">
+              <a href="#" target="_blank" rel="noopener noreferrer">Github</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
+              <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
