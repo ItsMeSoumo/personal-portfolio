@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis } from "lenis/react";
+import AnimatedCopy from "./AnimatedCopy";
 
 export default function Home() {
   const lenisRef = useRef();
@@ -75,6 +76,7 @@ export default function Home() {
           --accent-2: #f2acac;
           --accent-3: #fedd93;
           --accent-4: #81b7bf;
+          --accent-5:rgb(183, 87, 18);
         }
       `}</style>
       <style jsx>{`
@@ -123,6 +125,18 @@ p {
   color: #141414;
 }
 
+/* Hero subtitle under the main heading */
+.hero-sub {
+  margin-top: 1rem;
+  max-width: min(820px, 90vw);
+  margin-inline: auto;
+  line-height: 1.6;
+  font-size: clamp(1rem, 0.9vw + 0.9rem, 1.25rem);
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: none; /* override global uppercase for p */
+}
+
 .sticky-cards {
   position: relative;
   width: 100vw;
@@ -132,7 +146,7 @@ p {
 .card {
   position: sticky;
   width: 100%;
-  height: 125svh;
+  height: 155svh; /* increased to accommodate larger media */
   transform-style: preserve-3d;
   perspective: 1000px;
 }
@@ -164,6 +178,10 @@ p {
   background-color: var(--accent-4);
 }
 
+#card-5 .card-inner {
+  background-color: var(--accent-5);
+}
+
 .card-info {
   width: 25%;
   padding: 4em;
@@ -175,8 +193,8 @@ p {
 }
 
 .card-title h1 {
-  font-size: 10rem;
-  padding: 2rem 0;
+  font-size: 6rem;
+  padding: 1.25rem 0;
 }
 
 .card-description {
@@ -190,9 +208,21 @@ p {
 
 .card-img {
   width: 100%;
-  height: 100%;
-  margin-top: 4em;
+  height: 900vh !important; /* enforce larger height */
+  margin-top: 0;
+  margin-bottom: 1vh;
   overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f0f0f10; /* subtle backdrop */
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* override global cover */
 }
 
 .card-inner::after {
@@ -207,6 +237,45 @@ p {
   will-change: opacity;
   pointer-events: none;
   z-index: 2;
+}
+
+.card-link-btn {
+  position: absolute;
+  right: 3rem;
+  top: 35%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #111214;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.08);
+  z-index: 3;
+  will-change: transform, box-shadow;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.card-link-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  background: #0d0e10;
+}
+
+@media (max-width: 1000px) {
+  .card-link-btn {
+    right: 1.25rem;
+    top: auto;
+    bottom: 2.5rem;
+    width: 88px;
+    height: 88px;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -225,39 +294,56 @@ p {
   }
 
   .card-title h1 {
-    font-size: 3rem;
+    font-size: 2.25rem;
   }
 
   .card-description p {
     font-size: 1.25rem;
   }
 }
-
       
       `}</style>
 
       <section className="hero">
-        <h1>Art That Lives Online</h1>
+        <div>
+          <h1>Some Of My works</h1>
+          <AnimatedCopy>
+          <p className="hero-sub">
+            Designing and building interactive web experiences. Below are selected
+            works — dashboards, apps, and brand sites — with live demos and links.
+            Explore the projects to see craft, performance, and UX in action.
+          </p>
+          </AnimatedCopy>
+        </div>
       </section>
 
       <section className="sticky-cards">
         <div className="card" id="card-1">
           <div className="card-inner">
             <div className="card-info">
-              <p>A surreal dive into neon hues and playful decay</p>
+              <p>Assign work, capture trader inputs, track progress</p>
             </div>
             <div className="card-title">
-              <h1>Reverie</h1>
+              <h1>Admin Dashboard</h1>
             </div>
             <div className="card-description">
               <p>
-                A psychedelic skull study exploring the tension between
-                playfulness and decay. Bold candy tones, liquid forms, and crisp
-                vectors bring a surreal, pop-art mood meant for covers and prints.
+                A role‑based dashboard where traders, developers and social media managers submit updates and managers
+                assign tasks with clarity. Real‑time status tracking, progress
+                visibility per person, and streamlined handoffs make operations
+                effortless and auditable.
               </p>
             </div>
+            <a
+              href="https://admindashboard-liard.vercel.app/?tab=dashboard"
+              className="card-link-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </a>
             <div className="card-img">
-              <img src="/img1.jpg" alt="" />
+              <img src="/website-images/admindashboard.jpg" alt="Admin Dashboard preview" />
             </div>
           </div>
         </div>
@@ -265,20 +351,28 @@ p {
         <div className="card" id="card-2">
           <div className="card-inner">
             <div className="card-info">
-              <p>A retro-futurist scene where nostalgia meets glitch</p>
+              <p>Book visits, onboard doctors, manage via admin</p>
             </div>
             <div className="card-title">
-              <h1>Vaporwave</h1>
+              <h1>Doctor App</h1>
             </div>
             <div className="card-description">
               <p>
-                An 80s-UI dreamscape: stacked windows, checkerboard floors, and a
-                sunset gradient. Built to feel like a loading screen to another
-                world—nostalgic, glossy, and a bit uncanny.
+                A 3‑in‑1 appointment platform: patients book and track visits,
+                doctors self‑register and manage schedules, and an admin panel
+                oversees users, approvals, and reporting—all in one app.
               </p>
             </div>
+            <a
+              href="https://doctor-app-rho.vercel.app/login"
+              className="card-link-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </a>
             <div className="card-img">
-              <img src="/img2.jpg" alt="" />
+              <img src="/website-images/doctorapp.jpg" alt="Doctor App preview" />
             </div>
           </div>
         </div>
@@ -286,20 +380,28 @@ p {
         <div className="card" id="card-3">
           <div className="card-inner">
             <div className="card-info">
-              <p>A kaleidoscope of folk motifs reimagined in digital form</p>
+              <p>Real-world client delivery for a law firm</p>
             </div>
             <div className="card-title">
-              <h1>Kaleido</h1>
+              <h1>Law Firm Website</h1>
             </div>
             <div className="card-description">
               <p>
-                Ornamental symmetry inspired by folk motifs and stained-glass
-                glow. Designed as a seamless, tileable pattern for textiles,
-                wallpapers, and rich UI backgrounds.
+                A modern firm site delivered end‑to‑end: clear practice areas,
+                attorney profiles, and contact flows built for trust and
+                conversions. Optimized for speed, accessibility, and SEO.
               </p>
             </div>
+            <a
+              href="https://www.duckhawk.in/"
+              className="card-link-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </a>
             <div className="card-img">
-              <img src="/img3.jpg" alt="" />
+              <img src="/website-images/duckhawk.jpg" alt="Duckhawk preview" />
             </div>
           </div>
         </div>
@@ -307,20 +409,59 @@ p {
         <div className="card" id="card-4">
           <div className="card-inner">
             <div className="card-info">
-              <p>A portrait framed by oddball creatures and doodles</p>
+              <p>Modern startup platform for a dev + social media agency</p>
             </div>
             <div className="card-title">
-              <h1>Menagerie</h1>
+              <h1>Agency Platform</h1>
             </div>
             <div className="card-description">
               <p>
-                A playful portrait surrounded by oddball companions—mascots,
-                monsters, and midnight snacks. Loose linework meets pastel whimsy,
-                perfect for merch, stickers, and editorial spots.
+                Startup project with a crisp, modern UI for a development and
+                social media agency. Full‑stack build with a proper backend and
+                database, showcasing services, case studies, and lead capture—with
+                performance and SEO baked in.
               </p>
             </div>
+            <a
+              href="https://www.growmint.net/"
+              className="card-link-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </a>
             <div className="card-img">
-              <img src="/img4.jpg" alt="" />
+              <img src="/website-images/growmint.png" alt="Growmint preview" />
+            </div>
+          </div>
+        </div>
+
+        <div className="card" id="card-5">
+          <div className="card-inner"> 
+            <div className="card-info">
+              <p>GSAP masking, 3D model spins, layered parallax</p>
+            </div>
+            <div className="card-title">
+              <h1>Interactive Motion Site</h1>
+            </div>
+            <div className="card-description">
+              <p>
+                Frontend‑heavy client project for an agency: advanced GSAP
+                timelines with masking transitions, real‑time 3D model rotation,
+                and multi‑layer parallax for depth. Built for smooth performance
+                and a standout first impression.
+              </p>
+            </div>
+            <a
+              href="https://www.studiodevstag.com/home"
+              className="card-link-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </a>
+            <div className="card-img">
+              <img src="/website-images/studiodevstag.png" alt="Studio Devstag preview" />
             </div>
           </div>
         </div>

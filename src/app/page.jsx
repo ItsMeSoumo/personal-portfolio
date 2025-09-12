@@ -19,10 +19,6 @@ export default function Page() {
         <Slideback />
       </section>
 
-      <section>
-        <Text />
-      </section>
-
     </>
   );
 }

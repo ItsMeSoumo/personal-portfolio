@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis } from "lenis/react";
-import Plasma from "@/components/ui/plasma";
+import AnimatedCopy from "@/components/AnimatedCopy"; 
 
 export default function Home() {
   const lenisRef = useRef();
@@ -233,9 +233,118 @@ section {
 }
 
 .hero {
-  position: relative;
-  background-color: #000; /* dark base so Plasma alpha doesn't show white */
+  background-color: var(--light);
   color: var(--dark);
+}
+
+/* Centered tagline above hero cards */
+.hero-tagline {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: min(90%, 800px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  font-size: clamp(1.25rem, 1.8vw + 0.75rem, 2.25rem);
+  z-index: 1;
+}
+
+/* Intro two-column layout */
+.intro-grid {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(95%, 1200px);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(1rem, 4vw, 4rem);
+  align-items: start;
+  z-index: 1;
+}
+
+.intro-left h1 {
+  font-size: clamp(1.75rem, 3.5vw + 1rem, 3rem);
+  line-height: 1.25;
+  font-weight: 600; /* lighter than bold */
+  letter-spacing: -0.01em;
+}
+
+.intro-right p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #222;
+}
+
+.intro-circle {
+  margin-top: clamp(1rem, 3vw, 2rem);
+  width: clamp(120px, 10vw + 60px, 160px);
+  height: clamp(120px, 10vw + 60px, 160px);
+  border-radius: 50%;
+  background: #121316;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 1000px) {
+  .intro-grid {
+    top: 8%;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Use intro grid inside the about section (static flow) */
+.about .intro-grid {
+  position: relative;
+  top: 0;
+  left: auto;
+  transform: none;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.about .intro-right p {
+  color: var(--light2);
+}
+
+/* Scroll down indicator (restored) */
+.scroll-indicator {
+  position: absolute;
+  bottom: 12rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px; /* small width */
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dark);
+  opacity: 0.9;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scroll-indicator .arrow {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.15rem;
+  animation: bump 1.2s ease-in-out infinite;
+}
+
+@keyframes bump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+  100% { transform: translateY(0); }
 }
 
 .about,
@@ -247,10 +356,10 @@ section {
   color: var(--light);
 }
 
-/* Ensure the about section appears above fixed backgrounds */
+/* Override: make the about section white with dark text */
 .about {
-  position: relative;
-  z-index: 5;
+  background-color: #f9f4eb;
+  color: #141414;
 }
 
 .hero-cards {
@@ -322,9 +431,8 @@ section {
   height: 100svh;
   display: flex;
   justify-content: center;
-  /* keep this section visible; inner content controls stacking */
-  z-index: 0;
-  background-color: #000; /* dark base */
+  z-index: -1;
+  background-color: var(--light);
 }
 
 .cards-container {
@@ -510,15 +618,6 @@ section {
   }
 }
 
-/* Plasma background helper */
-.plasma-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0; /* behind content within section */
-  pointer-events: none;
-}
       `}</style>
 
       {/* <nav>
@@ -526,18 +625,57 @@ section {
         <div className="menu-btn"><span>Menu</span></div>
       </nav> */}
 
-      <section className="hero" style={{ backgroundColor: "#000" }}>
-        {/* <div className="plasma-bg">
-          <Plasma
-            color="#ff6b35"
-            speed={0.8}
-            direction="forward"
-            scale={1.0}
-            opacity={1}
-            mouseInteractive={true}
-          />
-        </div> */}
-        <div className="hero-cards" style={{ position: "relative", zIndex: 1 }}>
+      {/* Top-left big label */}
+      <style jsx>{`
+        .corner-hello {
+          top: 2.5rem; /* margin from top */
+          left: 1.25rem;
+          z-index: 1000;
+          pointer-events: none;
+          font-family: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+          color: #ffffff;
+          mix-blend-mode: difference;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          margin-top: 2rem;
+          margin-left: 2rem;
+        }
+
+        .corner-hello .hello {
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          font-size: clamp(2rem, 6vw + 1rem, 6rem);
+          text-transform: uppercase;
+        }
+
+        .corner-hello .name {
+          font-weight: 700;
+          line-height: 1.05;
+          letter-spacing: -0.02em;
+          font-size: clamp(1.25rem, 3.5vw + 0.5rem, 2.75rem);
+        }
+
+        @media (max-width: 600px) {
+          .corner-hello {
+            top: 1.25rem; /* margin from top on mobile */
+            left: 0.75rem;
+          }
+        }
+      `}</style>
+      <div className="corner-hello">
+        <div className="hello">HELLO !!</div>
+        <div className="name">I’m Soumodeep</div>
+      </div>
+
+      <section className="hero">
+        <div className="hero-tagline">WELCOME TO MY DEVELOPER PORTFOLIO</div>
+        <div className="scroll-indicator">
+          SCROLL DOWN
+          <span className="arrow">↓</span>
+        </div>
+        <div className="hero-cards">
           <div className="card" id="hero-card-1">
             <div className="card-title">
               <span>Plan</span>
@@ -574,7 +712,31 @@ section {
       </section>
 
       <section className="about">
-        <h1>Keep scrolling — it gets good</h1>
+        <div className="intro-grid">
+          <div className="intro-left">
+            <AnimatedCopy>
+            <h1>
+              Designing thoughtful interfaces.
+              <br />
+              Building standout digital experiences.
+              <br />
+              Merging creativity and code to craft
+              <br />
+              products users remember.
+            </h1>
+            </AnimatedCopy>
+          </div>
+          <div className="intro-right">
+            <AnimatedCopy>
+            <p>
+              Crafting modern, user‑first web experiences through a blend of
+              design sense and technical depth. Passionate about clean UI,
+              smooth performance, and standout solutions.
+            </p>
+            </AnimatedCopy>
+            <div className="intro-circle">About me</div>
+          </div>
+        </div>
       </section>
 
       <section className="services">
@@ -693,17 +855,7 @@ section {
       </section>
 
       <section className="cards">
-        <div className="plasma-bg">
-          <Plasma
-            color="#ff6b35"
-            speed={0.5}
-            direction="forward"
-            scale={1.0}
-            opacity={1}
-            mouseInteractive={true}
-          />
-        </div>
-        <div className="cards-container" style={{ position: "relative", zIndex: 1 }}>
+        <div className="cards-container">
           <div className="card" id="card-1">
             <div className="card-wrapper">
               <div className="flip-card-inner">
@@ -811,9 +963,6 @@ section {
         </div>
       </section>
 
-      <section className="outro">
-        <h1>The story’s not over yet</h1>
-      </section>
     </>
   );
 }
