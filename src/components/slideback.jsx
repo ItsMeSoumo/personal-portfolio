@@ -224,6 +224,13 @@ p {
 
 .pill:hover { background: rgba(255, 255, 255, 0.08); }
 
+/* Icon size inside pill buttons */
+.pill svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
 .outro-local-time,
 .outro-social {
   position: absolute;
@@ -264,7 +271,17 @@ p {
 @media (max-width: 800px) {
   .outro-title { font-size: clamp(2rem, 9vw, 3rem); }
   .outro-cta { width: 128px; height: 128px; top: calc(52% - 64px); right: 1rem; }
-  .outro-pills { flex-direction: column; gap: 0.75rem; }
+  .outro { padding-bottom: calc(2.5rem + env(safe-area-inset-bottom)); }
+  .outro-pills { flex-direction: column; gap: 0.75rem; bottom: 5.5rem; }
+  /* Stack bottom meta on mobile */
+  .outro-local-time,
+  .outro-social {
+    position: static;
+    text-align: center;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+  }
+  .outro-social .links a { margin: 0 0.6rem; }
 }
 
 /* Hero subtitle under the main heading */
@@ -618,7 +635,18 @@ p {
 
           <div className="outro-pills">
             <a className="pill" href="mailto:soumo2020.saha@gmail.com">soumo2020.saha@gmail.com</a>
-            <a className="pill" href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+            <a
+              className="pill"
+              href="/Soumodeep%20Saha-resume%20(2).pdf"
+              download="Soumodeep-Saha-Resume.pdf"
+              rel="noopener noreferrer"
+            >
+              Resume
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 19h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </a>
           </div>
 
           <div className="outro-local-time">

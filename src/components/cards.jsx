@@ -313,7 +313,77 @@ section {
 }
 
 .about .intro-right p {
-  color: var(--light2);
+  color: #2a2a2a; /* better contrast on light glass bg */
+}
+
+/* Small heading for subsections inside About */
+.panel-title {
+  font-size: clamp(1rem, 0.7vw + 0.9rem, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0.25rem 0 0.5rem;
+  color: #141414;
+}
+
+/* Story timeline styles */
+.story-timeline {
+margin-top: 1rem;
+background: rgba(255,255,255,0.6);
+border: 1px solid rgba(20,20,20,0.08);
+border-radius: 16px;
+padding: clamp(12px, 2vw, 20px);
+backdrop-filter: blur(10px) saturate(120%);
+box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.story-item {
+display: grid;
+grid-template-columns: auto 110px 1fr;
+gap: 1rem;
+align-items: start;
+padding: 14px 8px;
+border-bottom: 1px solid rgba(20,20,20,0.06);
+}
+.story-item:last-child { border-bottom: none; }
+
+.story-item .dot {
+width: 10px;
+height: 10px;
+margin-top: 6px;
+border-radius: 50%;
+background: #8b5cf6; /* soft purple */
+box-shadow: 0 0 0 4px rgba(139,92,246,0.15);
+}
+
+.story-item .year {
+font-family: "DM Mono", monospace;
+font-size: 0.9rem;
+letter-spacing: 0.06em;
+color: rgba(20,20,20,0.6);
+padding-top: 2px;
+}
+
+.story-copy .title {
+font-weight: 700;
+letter-spacing: -0.01em;
+margin-bottom: 4px;
+color: #141414;
+}
+
+.story-copy .desc {
+  color: rgba(20,20,20,0.75);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1000px) {
+  .story-item {
+    grid-template-columns: auto 88px 1fr;
+    gap: 0.75rem;
+  }
+  .story-item .year { font-size: 0.8rem; }
+  .story-copy .desc { font-size: 0.9rem; }
 }
 
 /* Scroll down indicator (restored) */
@@ -358,8 +428,13 @@ section {
 
 /* Override: make the about section white with dark text */
 .about {
-  background-color: #f9f4eb;
+  background-color: rgba(255,255,255,0.7);
   color: #141414;
+  backdrop-filter: blur(10px) saturate(120%);
+  display: block;       /* allow content to flow */
+  height: auto;         /* override section's 100svh */
+  min-height: auto;
+  padding: 2rem 0 3rem; /* breathing room */
 }
 
 .hero-cards {
@@ -711,19 +786,56 @@ section {
         </div>
       </section>
 
-      <section className="about">
+      <section id="about" className="about">
         <div className="intro-grid">
           <div className="intro-left">
             <AnimatedCopy>
-            <h1>
-              Design‑driven developer shipping real products.
-              <br />
-              Dashboards that align teams and track progress.
-              <br />
-              Apps for clinics, firms and agencies.
-              <br />
-              Motion‑rich websites that feel fast and alive.
-            </h1>
+            <h3 className="panel-title">Education</h3>
+            <div id="personal-timeline" className="story-timeline">
+              <div className="story-item">
+                <span className="dot" />
+                <span className="year">2022–2025</span>
+                <div className="story-copy">
+                  <div className="title">MAKAUT UNIVERSITY</div>
+                  <div className="desc">Bachelor's Degree in Computer Application • George Group of College, Sealdah • CGPA: 7.2/10</div>
+                </div>
+              </div>
+              <div className="story-item">
+                <span className="dot" />
+                <span className="year">2020–2022</span>
+                <div className="story-copy">
+                  <div className="title">MANINDRA CHANDRA VIDYAPITH SCHOOL</div>
+                  <div className="desc">Science with computer science • 12th state board: 66.4%</div>
+                </div>
+              </div>
+              <div className="story-item">
+                <span className="dot" />
+                <span className="year">2020</span>
+                <div className="story-copy">
+                  <div className="title">PRABHARANI PUBLIC SCHOOL</div>
+                  <div className="desc">10th CBSE board – 74.2%</div>
+                </div>
+              </div>
+            </div>
+            <h3 className="panel-title">Experience</h3>
+            <div className="story-timeline">
+              <div className="story-item">
+                <span className="dot" />
+                <span className="year">May–Sep 2025</span>
+                <div className="story-copy">
+                  <div className="title">Freelance Software Developer · Growmint (Remote)</div>
+                  <div className="desc">Core team member; led frontend on client & internal projects. Stack: Next.js, MERN.</div>
+                </div>
+              </div>
+              <div className="story-item">
+                <span className="dot" />
+                <span className="year">Oct 2024–Jan 2025</span>
+                <div className="story-copy">
+                  <div className="title">MERN Stack Developer · Euphoria GenX (Hybrid)</div>
+                  <div className="desc">Built a real‑time chat app; contributed across React & Node; shipped features end‑to‑end.</div>
+                </div>
+              </div>
+            </div>
             </AnimatedCopy>
           </div>
           <div className="intro-right">

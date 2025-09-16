@@ -102,9 +102,9 @@ export default function Home() {
         menuToggleBtn?.addEventListener("click", onToggleClick);
 
         // Smooth-scroll navigation for menu links
-        // Attach to ALL menu links so the menu always closes on click
+        // Attach to ALL menu links and tags so the menu always closes on click
         const navLinks = Array.from(
-          document.querySelectorAll('.menu-link a')
+          document.querySelectorAll('.menu-link a, .menu-tag a')
         );
         const navHandlers = [];
 
@@ -383,6 +383,11 @@ nav {
   flex: 3;
 }
 
+/* Add extra spacing between Index / Portfolio / Connect */
+.menu-content-main .menu-col:nth-child(1) {
+  gap: 1.25rem;
+}
+
 .menu-col:nth-child(2) {
   flex: 2;
 }
@@ -461,24 +466,20 @@ nav {
                                 <div className="menu-col">
                                     <div className="menu-link"><a href="#top" data-target="top">Index</a></div>
                                     <div className="menu-link"><a href="#portfolio" data-target="#portfolio">Portfolio</a></div>
-                                    <div className="menu-link"><a href="#">Studio</a></div>
-                                    <div className="menu-link"><a href="#">Journal</a></div>
                                     <div className="menu-link"><a href="#connect" data-target="#connect">Connect</a></div>
                                 </div>
 
                                 <div className="menu-col">
-                                    <div className="menu-tag"><a href="#">Web Animations</a></div>
-                                    <div className="menu-tag"><a href="#">Interactive Media</a></div>
-                                    <div className="menu-tag"><a href="#">Motion Craft</a></div>
+                                    <div className="menu-tag"><a href="#about" data-target="#about">About me</a></div>
                                 </div>
                             </div>
                             <div className="menu-footer">
                                 <div className="menu-col">
-                                    <p>Toronto, Canada</p>
+                                    <p>India</p>
                                 </div>
                                 <div className="menu-col">
-                                    <p>+1 437 555 0199</p>
-                                    <p>hello@nullspace.studio</p>
+                                    <p>+91 9883060948</p>
+                                    <p>soumo2020.saha@gmail.com</p>
                                 </div>
                             </div>
                         </div>
