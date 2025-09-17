@@ -800,22 +800,6 @@ color: #141414;
                   <div className="desc">Bachelor's Degree in Computer Application • George Group of College, Sealdah • CGPA: 7.2/10</div>
                 </div>
               </div>
-              <div className="story-item">
-                <span className="dot" />
-                <span className="year">2020–2022</span>
-                <div className="story-copy">
-                  <div className="title">MANINDRA CHANDRA VIDYAPITH SCHOOL</div>
-                  <div className="desc">Science with computer science • 12th state board: 66.4%</div>
-                </div>
-              </div>
-              <div className="story-item">
-                <span className="dot" />
-                <span className="year">2020</span>
-                <div className="story-copy">
-                  <div className="title">PRABHARANI PUBLIC SCHOOL</div>
-                  <div className="desc">10th CBSE board – 74.2%</div>
-                </div>
-              </div>
             </div>
             <h3 className="panel-title">Experience</h3>
             <div className="story-timeline">
