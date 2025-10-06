@@ -632,13 +632,12 @@ p {
           <div className="outro-divider" />
 
           <a className="outro-cta" href="mailto:soumo2020.saha@gmail.com">Get in touch</a>
-
           <div className="outro-pills">
             <a className="pill" href="mailto:soumo2020.saha@gmail.com">soumo2020.saha@gmail.com</a>
             <a
               className="pill"
-              href="/Soumodeep%20Saha-resume%20(2).pdf"
-              download="Soumodeep-Saha-Resume.pdf"
+              href="/SOUMODEEP_SAHA-RESUME.pdf"
+              download="SOUMODEEP_SAHA-RESUME.pdf"
               rel="noopener noreferrer"
             >
               Resume
