@@ -696,9 +696,9 @@ p {
           <div className="outro-social">
             <div className="outro-social-title">Socials</div>
             <div className="links">
-              <a href="#" target="_blank" rel="noopener noreferrer">Github</a>
-              <a href="#" target="_blank" rel="noopener noreferrer">Twitter</a>
-              <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://github.com/ItsMeSoumo" target="_blank" rel="noopener noreferrer">Github</a>
+              <a href="https://x.com/SoumodeepSaha10" target="_blank" rel="noopener noreferrer">Twitter</a>
+              <a href="https://www.linkedin.com/in/soumodeep-saha-13815321b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
           </div>
         </div>
