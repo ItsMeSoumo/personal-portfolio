@@ -462,6 +462,46 @@ p {
 }
       
       `}</style>
+      <style jsx global>{`
+        /* Hide horizontal scrollbar while maintaining functionality */
+        html {
+          overflow-x: auto;
+          scrollbar-width: none; /* Firefox */
+        }
+        
+        html::-webkit-scrollbar {
+          height: 0px;
+          width: 0px;
+          background: transparent; /* Chrome/Safari/Opera */
+        }
+        
+        html::-webkit-scrollbar-thumb {
+          background: transparent;
+        }
+        
+        html::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        
+        body {
+          overflow-x: auto;
+          scrollbar-width: none; /* Firefox */
+        }
+        
+        body::-webkit-scrollbar {
+          height: 0px;
+          width: 0px;
+          background: transparent; /* Chrome/Safari/Opera */
+        }
+        
+        body::-webkit-scrollbar-thumb {
+          background: transparent;
+        }
+        
+        body::-webkit-scrollbar-track {
+          background: transparent;
+        }
+      `}</style>
 
       <section id="portfolio" className="hero">
         <div>
@@ -480,21 +520,21 @@ p {
         <div className="card" id="card-1">
           <div className="card-inner">
             <div className="card-info">
-              <p>Assign work, capture trader inputs, track progress</p>
+              <p>Voice, chats and AI automation agents</p>
             </div>
             <div className="card-title">
-              <h1>Admin Dashboard</h1>
+              <h1>Agency Platform</h1>
             </div>
             <div className="card-description">
               <p>
-                A role‑based dashboard where traders, developers and social media managers submit updates and managers
-                assign tasks with clarity. Real‑time status tracking, progress
-                visibility per person, and streamlined handoffs make operations
-                effortless and auditable.
+                My agency's flagship platform specializing in intelligent voice solutions,
+                chat systems, and AI automation agents. We build cutting-edge conversational
+                experiences that streamline operations and enhance customer engagement through
+                smart automation and natural language processing.
               </p>
             </div>
             <a
-              href="https://admindashboard-liard.vercel.app/?tab=dashboard"
+              href="https://www.pixxelorbit.com/"
               className="card-link-btn"
               target="_blank"
               rel="noopener noreferrer"
@@ -502,7 +542,7 @@ p {
               Visit
             </a>
             <div className="card-img">
-              <img src="/website-images/admindashboard.jpg" alt="Admin Dashboard preview" />
+              <img src="/website-images/pixxelorbit.png" alt="Pixxel Orbit preview" />
             </div>
           </div>
         </div>
@@ -568,21 +608,21 @@ p {
         <div className="card" id="card-4">
           <div className="card-inner">
             <div className="card-info">
-              <p>Modern startup platform for a dev + social media agency</p>
+              <p>Student teacher mentorship program with real-time PDF system</p>
             </div>
             <div className="card-title">
-              <h1>Agency Platform</h1>
+              <h1>Ask Your Counsellor</h1>
             </div>
             <div className="card-description">
               <p>
-                Startup project with a crisp, modern UI for a development and
-                social media agency. Full‑stack build with a proper backend and
-                database, showcasing services, case studies, and lead capture—with
-                performance and SEO baked in.
+                An innovative mentorship platform connecting students with teachers for
+                personalized guidance. Features custom dashboards for every student,
+                real-time PDF upload system from teachers, and seamless communication
+                tools for effective learning and academic support.
               </p>
             </div>
             <a
-              href="https://www.growmint.net/"
+              href="https://www.askyourcounsellor.in/"
               className="card-link-btn"
               target="_blank"
               rel="noopener noreferrer"
@@ -590,7 +630,7 @@ p {
               Visit
             </a>
             <div className="card-img">
-              <img src="/website-images/growmint.png" alt="Growmint preview" />
+              <img src="/website-images/askyourcouncellor.png" alt="Ask Your Counsellor preview" />
             </div>
           </div>
         </div>
